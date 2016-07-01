@@ -20389,6 +20389,20 @@ var ProductPopup = function (_React$Component) {
   }
 
   _createClass(ProductPopup, [{
+    key: 'renderUpvoteButton',
+    value: function renderUpvoteButton() {
+      return _react2.default.createElement(
+        'a',
+        { className: 'upvote-button', href: '#' },
+        _react2.default.createElement(
+          'span',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
+        ),
+        this.state.product.upvote
+      );
+    }
+  }, {
     key: 'renderHeader',
     value: function renderHeader() {
       return _react2.default.createElement(
@@ -20421,17 +20435,35 @@ var ProductPopup = function (_React$Component) {
       );
     }
   }, {
-    key: 'renderUpvoteButton',
-    value: function renderUpvoteButton() {
+    key: 'renderBodyDiscussion',
+    value: function renderBodyDiscussion() {
       return _react2.default.createElement(
-        'a',
-        { className: 'upvote-button', href: '#' },
+        'section',
+        { className: 'discussion' },
         _react2.default.createElement(
-          'span',
+          'h2',
           null,
-          _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
+          'Discussion'
         ),
-        this.state.product.upvote
+        _react2.default.createElement(
+          'section',
+          { className: 'post-comment' },
+          _react2.default.createElement('img', { className: 'medium-avatar', src: 'img/leo.jpeg' }),
+          _react2.default.createElement('input', { placeholder: 'What do you think of this product?' })
+        )
+      );
+    }
+  }, {
+    key: 'renderBody',
+    value: function renderBody() {
+      return _react2.default.createElement(
+        'section',
+        { className: 'product-popup-body' },
+        _react2.default.createElement(
+          'main',
+          null,
+          this.renderBodyDiscussion()
+        )
       );
     }
   }, {
