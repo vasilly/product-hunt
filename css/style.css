@@ -319,6 +319,53 @@ color: #928B8B;
   width: 100%;
 }
 
+/*PRODUCT POPUP*/
+  .product-popup{
+    width:80%;
+    height:100%;
+    top:0;
+    right:0;
+    background-color: white;
+    overflow:scroll;
+border-left: 1px solid #f0efef;
+  }
+
+  .product-popup header{
+    text-align: center;
+    background-color: #fe9aee;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+  }
+
+  .product-popup header .header-shadow{
+    background-color: transparent;
+    background-image: linear-gradient(-225deg, rgba(0,101,168,0.6), 0%, rgba(0,36,61,0.6), 50%);
+    padding: 45px;
+}
+
+  .product-popup header .header-shadow h1{
+font-size: 40px;
+font-weight:900;
+color:white;
+line-height: 48px;
+}
+
+  .product-popup header .header-shadow p{
+line-height: 55px;
+
+font-size: 18px;
+color: #cdd1d3;
+}
+
+  .product-popup header .header-shadow > section > *{
+    display:inline-block;
+    vertical-align: middle;
+}
+
+
+
 /* ------------------------------ PROILE MENU ------------------------------*/
 .profile-menu .profile-btn {
   opacity: 0.9;
