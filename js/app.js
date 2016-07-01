@@ -19607,23 +19607,23 @@ var HomePage = function (_React$Component) {
         id: 1,
         name: 'Codecademy',
         link: 'https://codecademy.com',
-        media: '/img/codecademy.jpeg',
+        media: 'img/codecademy.jpeg',
         upvote: 169,
         description: 'Code for anyone',
         maker: {
           name: 'hieu',
-          avatar: '/img/hieu.jpeg'
+          avatar: 'img/hieu.jpeg'
         }
       }, {
         id: 2,
         name: 'Code4Startup',
         link: 'https://code4startup.com',
-        media: '/img/code4startup.jpeg',
+        media: 'img/code4startup.jpeg',
         upvote: 278,
         description: 'Code for starups',
         maker: {
           name: 'leo',
-          avatar: '/img/leo.jpeg'
+          avatar: 'img/leo.jpeg'
         }
       }]
     };
@@ -19639,7 +19639,7 @@ var HomePage = function (_React$Component) {
         _react2.default.createElement(
           'header',
           null,
-          _react2.default.createElement('img', { src: '/img/banner.jpeg', width: '100%' })
+          _react2.default.createElement('img', { src: 'img/banner.jpeg', width: '100%' })
         ),
         _react2.default.createElement(
           'section',
@@ -20019,7 +20019,7 @@ var ProfileMenu = function (_React$Component) {
       return _react2.default.createElement(
         "section",
         { className: "profile-menu" },
-        _react2.default.createElement("img", { src: "/img/leo.jpeg", onClick: this.handleClick, className: "profile-btn medium-avatar", ref: "profileBtn" }),
+        _react2.default.createElement("img", { src: "img/leo.jpeg", onClick: this.handleClick, className: "profile-btn medium-avatar", ref: "profileBtn" }),
         this.state.showProfileNav ? this.renderProfileNav() : null
       );
     }
