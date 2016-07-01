@@ -47,9 +47,10 @@ renderHeader(){
   }
 
     render() {
-        return ( <Popup {...this.props }
-            style = "product-popup" >
-            <h2> Product Info Here </h2> </Popup>
+        return (
+          <Popup {...this.props } style = "product-popup" >
+            {this.renderHeader()}
+          </Popup>
         );
     }
 

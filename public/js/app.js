@@ -20340,7 +20340,7 @@ exports.default = ProductList;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20364,94 +20364,88 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ProductPopup = function (_React$Component) {
-    _inherits(ProductPopup, _React$Component);
+  _inherits(ProductPopup, _React$Component);
 
-    function ProductPopup() {
-        _classCallCheck(this, ProductPopup);
+  function ProductPopup() {
+    _classCallCheck(this, ProductPopup);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
 
-        _this.state = {
-            product: {
-                id: 2,
-                name: 'Code4Startup',
-                link: 'https://code4startup.com',
-                media: 'img/code4startup.jpeg',
-                upvote: 278,
-                description: 'Code for starups',
-                maker: {
-                    name: 'leo',
-                    avatar: 'img/leo.jpeg'
-                }
-            }
-        };
-        return _this;
+    _this.state = {
+      product: {
+        id: 2,
+        name: 'Code4Startup',
+        link: 'https://code4startup.com',
+        media: 'img/code4startup.jpeg',
+        upvote: 278,
+        description: 'Code for starups',
+        maker: {
+          name: 'leo',
+          avatar: 'img/leo.jpeg'
+        }
+      }
+    };
+    return _this;
+  }
+
+  _createClass(ProductPopup, [{
+    key: 'renderHeader',
+    value: function renderHeader() {
+      return _react2.default.createElement(
+        'header',
+        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
+        _react2.default.createElement(
+          'section',
+          { className: 'header-shadow' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            this.state.product.name
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.state.product.description
+          ),
+          _react2.default.createElement(
+            'section',
+            null,
+            this.renderUpvoteButton(),
+            _react2.default.createElement(
+              'a',
+              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
+              'GET IT'
+            )
+          )
+        )
+      );
     }
+  }, {
+    key: 'renderUpvoteButton',
+    value: function renderUpvoteButton() {
+      return _react2.default.createElement(
+        'a',
+        { className: 'upvote-button', href: '#' },
+        _react2.default.createElement(
+          'span',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
+        ),
+        this.state.product.upvote
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _Popup2.default,
+        _extends({}, this.props, { style: 'product-popup' }),
+        this.renderHeader()
+      );
+    }
+  }]);
 
-    _createClass(ProductPopup, [{
-        key: 'renderHeader',
-        value: function renderHeader() {
-            return _react2.default.createElement(
-                'header',
-                { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
-                _react2.default.createElement(
-                    'section',
-                    { className: 'header-shadow' },
-                    _react2.default.createElement(
-                        'h1',
-                        null,
-                        this.state.product.name
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        this.state.product.description
-                    ),
-                    _react2.default.createElement(
-                        'section',
-                        null,
-                        this.renderUpvoteButton(),
-                        _react2.default.createElement(
-                            'a',
-                            { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
-                            'GET IT'
-                        )
-                    )
-                )
-            );
-        }
-    }, {
-        key: 'renderUpvoteButton',
-        value: function renderUpvoteButton() {
-            return _react2.default.createElement(
-                'a',
-                { className: 'upvote-button', href: '#' },
-                _react2.default.createElement(
-                    'span',
-                    null,
-                    _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
-                ),
-                this.state.product.upvote
-            );
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                _Popup2.default,
-                _extends({}, this.props, {
-                    style: 'product-popup' }),
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    ' Product Info Here '
-                ),
-                ' '
-            );
-        }
-    }]);
-
-    return ProductPopup;
+  return ProductPopup;
 }(_react2.default.Component);
 
 exports.default = ProductPopup;
