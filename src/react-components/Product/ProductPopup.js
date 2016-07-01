@@ -73,6 +73,7 @@ renderBody(){
         return (
           <Popup {...this.props } style = "product-popup" >
             {this.renderHeader()}
+            {this.renderBody()}
           </Popup>
         );
     }
