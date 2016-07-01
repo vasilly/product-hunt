@@ -20472,7 +20472,8 @@ var ProductPopup = function (_React$Component) {
       return _react2.default.createElement(
         _Popup2.default,
         _extends({}, this.props, { style: 'product-popup' }),
-        this.renderHeader()
+        this.renderHeader(),
+        this.renderBody()
       );
     }
   }]);
