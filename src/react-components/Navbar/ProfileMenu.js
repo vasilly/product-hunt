@@ -37,7 +37,7 @@ class ProfileMenu extends React.Component {
   render() {
     return (
       <section className="profile-menu">
-        <img src="/img/leo.jpeg" onClick= {this.handleClick} className="profile-btn medium-avatar" ref="profileBtn"/>
+        <img src="img/leo.jpeg" onClick= {this.handleClick} className="profile-btn medium-avatar" ref="profileBtn"/>
         {
           this.state.showProfileNav? this.renderProfileNav() : null
         }
