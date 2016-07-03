@@ -44,7 +44,7 @@ renderUser(){
       <section>
         <span>
           <a href="#" onClick={this.showPopup} className="login-btn">POST</a>
-          <ProfileMenu/>
+          <ProfileMenu user={this.props.user}/>
         </span>
         <PostPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
         <p>{console.log("this.state.popupStatus: "+this.state.popupStatus)}</p>
