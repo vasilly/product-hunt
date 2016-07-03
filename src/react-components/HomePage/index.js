@@ -7,32 +7,32 @@ import Actions from '../../actions';
 
 @connectToStores
 class HomePage extends React.Component {
-
   constructor() {
     super();
     Actions.getProducts();
   }
 
-  static getstores() {
+  static getStores() {
     return [ProductStore];
   }
 
   static getPropsFromStores() {
     return ProductStore.getState();
   }
+
   render() {
     return (
       <section>
         <header>
-          <img src="img/banner.jpeg" width="100%" />
+          <img src="/img/banner.jpeg" width="100%" />
         </header>
 
         <section>
           <section className="container">
             {
-              this.products.products
+              this.props.products
               ?
-              <ProductList productList={this.products.products}/>
+              <ProductList productList={this.props.products}/>
               :
               null
             }

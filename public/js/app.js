@@ -21934,7 +21934,7 @@ var HomePage = (0, _connectToStores2.default)(_class = function (_React$Componen
         _react2.default.createElement(
           'header',
           null,
-          _react2.default.createElement('img', { src: 'img/banner.jpeg', width: '100%' })
+          _react2.default.createElement('img', { src: '/img/banner.jpeg', width: '100%' })
         ),
         _react2.default.createElement(
           'section',
@@ -21942,14 +21942,14 @@ var HomePage = (0, _connectToStores2.default)(_class = function (_React$Componen
           _react2.default.createElement(
             'section',
             { className: 'container' },
-            this.products.products ? _react2.default.createElement(_ProductList2.default, { productList: this.products.products }) : null
+            this.props.products ? _react2.default.createElement(_ProductList2.default, { productList: this.props.products }) : null
           )
         )
       );
     }
   }], [{
-    key: 'getstores',
-    value: function getstores() {
+    key: 'getStores',
+    value: function getStores() {
       return [_ProductStore2.default];
     }
   }, {
