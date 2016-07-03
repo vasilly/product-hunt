@@ -21788,14 +21788,15 @@ var Actions = function () {
     key: 'login',
     value: function login() {
       return function (dispatch) {
-        var firebaseRef = new _firebase2.default('https://product-hunt.firebaseio.com');
+        var firebaseRef = new _firebase2.default('https://codehunt-demo.firebaseio.com');
         firebaseRef.authWithOAuthPopup('facebook', function (error, authData) {
           if (error) {
             return;
           }
+
           var user = {
             id: authData.facebook.id,
-            name: authData.facebook.isplayName,
+            name: authData.facebook.displayName,
             avatar: authData.facebook.profileImageURL
           };
           firebaseRef.child("users").child(authData.facebook.id).set(user);
@@ -21808,7 +21809,7 @@ var Actions = function () {
   return Actions;
 }();
 
-exports.default = alt.createActions(Actions);
+exports.default = _alt2.default.createActions(Actions);
 
 },{"../alt":185,"firebase":38}],185:[function(require,module,exports){
 'use strict';
