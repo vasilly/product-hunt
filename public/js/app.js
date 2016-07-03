@@ -21788,12 +21788,11 @@ var Actions = function () {
     key: 'login',
     value: function login() {
       return function (dispatch) {
-        var firebaseRef = new _firebase2.default('https://codehunt-demo.firebaseio.com');
+        var firebaseRef = new _firebase2.default('https://product-hunt.firebaseio.com');
         firebaseRef.authWithOAuthPopup('facebook', function (error, authData) {
           if (error) {
             return;
           }
-
           var user = {
             id: authData.facebook.id,
             name: authData.facebook.displayName,
