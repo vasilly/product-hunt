@@ -60,7 +60,7 @@ body {
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 20pxl
   line-height: 70;
   font-weight: 500;
 }
@@ -455,5 +455,3 @@ button:hover {
   background-color: #f2f2f2;
   border-radius: 4px;
 }
-
-/*before fix*/
