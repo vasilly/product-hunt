@@ -4,54 +4,60 @@ import Firebase from 'firebase';
 class Actions {
 
   initSession() {
-      return (dispatch) => {
-          var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
-          var authData = firebaseRef.getAuth();
-          var user;
+    return (dispatch) => {
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
+      var authData = firebaseRef.getAuth();
+      var user;
 
-          if (authData) {
-              var user = {
-                  id: authData.facebook.id,
-                  name: authData.facebook.displayName,
-                  avatar: authData.facebook.profileImageURL,
-              }
-          } else {
-              user = null;
-          }
-          setTimeout(() => dispatch(user));
+      if(authData) {
+        user = {
+          id: authData.facebook.id,
+          name: authData.facebook.displayName,
+          avatar: authData.facebook.profileImageURL
+        }
+      } else {
+        user = null;
       }
+      setTimeout(() => dispatch(user));
+    }
   }
 
-  login ()  {
+  login() {
     return (dispatch) => {
-    var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
-    firebaseRef.authWithOAuthPopup('facebook', (error, authData) => {
-      if(error){
-        return;
-      }
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
+      firebaseRef.authWithOAuthPopup('facebook', (error, authData) => {
+        if (error) {
+          return;
+        }
 
-      var user = {
-        id:authData.facebook.id,
-        name:authData.facebook.displayName,
-        avatar:authData.facebook.profileImageURL,
-      }
-      firebaseRef.child("users").child(authData.facebook.id).set(user)
-      dispatch(user);
+        var user = {
+          id: authData.facebook.id,
+          name: authData.facebook.displayName,
+          avatar: authData.facebook.profileImageURL
+        }
+        firebaseRef.child("users").child(authData.facebook.id).set(user);
+        dispatch(user);
       });
     }
   }
 
-  logout () {
-    return (dispatch) => {
+  logout() {
+    return(dispatch) => {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
       firebaseRef.unauth();
       setTimeout(() => dispatch(null));
     }
   }
+
+  getProducts() {
+    return(dispatch) => {
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/products');
+      firebaseRef.on('value', (snapshop) => {
+        var products = snapshop.val();
+        dispatch(products);
+      });
+    }
+  }
 }
 
 export default alt.createActions(Actions);
-
-
-
-

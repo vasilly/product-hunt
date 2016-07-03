@@ -29,7 +29,7 @@ class Navbar extends React.Component {
 
   renderLogo() {
     return (
-      <a href="#"><img src="img/favicon.ico"/></a>
+      <a href="#"><img src="/img/favicon.ico"/></a>
     );
   }
 

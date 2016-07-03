@@ -1,27 +1,25 @@
 import React from 'react';
 import ProductList from '../Product/ProductList';
 import Firebase from 'firebase';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ProductStore from '../../stores/ProductStore';
+import Actions from '../../actions';
 
+@connectToStores
 class HomePage extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      productList: []
-    }
-
-    var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/products');
-    firebaseRef.on('value', (snapshot) => {
-      var products = snapshot.val();
-      console.log("products")
-      console.log(products)
-      this.setState({
-          productList:products
-      })
-    });
-
+    Actions.getProducts();
   }
 
+  static getstores() {
+    return [ProductStore];
+  }
+
+  static getPropsFromStores() {
+    return ProductStore.getState();
+  }
   render() {
     return (
       <section>
@@ -32,9 +30,9 @@ class HomePage extends React.Component {
         <section>
           <section className="container">
             {
-              this.state.productList
+              this.products.products
               ?
-              <ProductList productList={this.state.productList}/>
+              <ProductList productList={this.products.products}/>
               :
               null
             }
