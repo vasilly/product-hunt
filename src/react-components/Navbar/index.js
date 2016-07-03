@@ -43,10 +43,12 @@ renderUser(){
       //Display Post link here
       <section>
         <span>
-            <a href="#" onClick={this.showPopup} className="login-btn">POST</a>
-        <ProfileMenu/>
+          <a href="#" onClick={this.showPopup} className="login-btn">POST</a>
+          <ProfileMenu/>
         </span>
         <PostPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
+        <p>{console.log("this.state.popupStatus: "+this.state.popupStatus)}</p>
+
       </section>
 
       :
@@ -54,6 +56,7 @@ renderUser(){
       <section>
         <a href="#" onClick={this.showPopup} className="login-btn">LOGIN</a>
         <LoginPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
+        <p>{"this.state.popupStatus: "+this.state.popupStatus}</p>
       </section>
     }
     </section>
