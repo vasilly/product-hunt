@@ -58,6 +58,13 @@ class Actions {
       });
     }
   }
+
+    addProduct(product) {
+      return (dispatch) => {
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
+      firebaseRef.push()
+      }
+    }
 }
 
 export default alt.createActions(Actions);
