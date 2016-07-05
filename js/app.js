@@ -38977,8 +38977,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class;
@@ -39028,7 +39026,7 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
     };
 
     _this.handleVote = function () {
-      _actions2.default.addVote(_this.props.pid, _this.props.user.id);
+      _actions2.default.addVote(_this.props.pid, _this.props.user);
     };
 
     _this.state = {
@@ -39067,9 +39065,6 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
   }, {
     key: 'renderInfoSession',
     value: function renderInfoSession() {
-      console.log("renderInfoSession");
-      console.log("this.props.description:");
-      console.log(this.props.description);
       return _react2.default.createElement(
         'section',
         { className: 'product-item-info' },
@@ -39087,7 +39082,11 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
           null,
           this.props.description
         ),
-        _react2.default.createElement('a', { href: '#' })
+        _react2.default.createElement(
+          'a',
+          { href: '#' },
+          _react2.default.createElement('img', { className: 'small-avatar', src: this.props.maker.avatar })
+        )
       );
     }
   }, {
@@ -39098,8 +39097,9 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
         { className: 'product-item' },
         this.renderUpvoteButton(),
         _react2.default.createElement('img', { className: 'product-item-media', src: this.props.media }),
+        this.renderInfoSession(),
         this.renderNewWindowIcon(),
-        _react2.default.createElement(_ProductPopup2.default, _extends({}, this.props, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup }))
+        _react2.default.createElement(_ProductPopup2.default, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup })
       );
     }
   }], [{
