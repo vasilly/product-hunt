@@ -102,7 +102,7 @@ console.log("productKey"); console.log(productKey)
       });
     }
   }
-  addComment(productId, commnet) {
+  addComment(productId, comment) {
     return (dispatch) => {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/comments');
       firebaseRef.child(productId).push(comment);
@@ -120,7 +120,7 @@ console.log("productKey"); console.log(productKey)
           return item;
         } )
         .value();
-        dispath(comments);
+        dispatch(comments);
       } );
 
     }

@@ -21,7 +21,7 @@ class ProductStore {
   getProducts(products) {
     this.setState({products: products});
   }
-  @bind(Actions.getComment)
+  @bind(Actions.getComments)
   getComments(comments) {
     this.setState({comments: comments})
   }
