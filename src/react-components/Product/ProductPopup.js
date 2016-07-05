@@ -1,6 +1,11 @@
 import React from 'react';
 import Popup from '../Navbar/Popup';
+import Upvote from './Upvote';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ProductStore from '../../stores/ProductStore';
+import Actions from '../../actions';
 
+@connectToStores
 class ProductPopup extends React.Component {
   constructor() {
     super();
@@ -20,15 +25,12 @@ class ProductPopup extends React.Component {
     }
   }
 
-  renderUpvoteButton() {
-    return (
-      <a className="upvote-button" href="#">
-        <span>
-          <i className="fa fa-sort-asc"></i>
-        </span>
-        {this.props.upvote}
-      </a>
-    );
+  static getStores() {
+    return [ProductStore];
+  }
+
+  static getPropsFromStores() {
+    return ProductStore.getState();
   }
 
   renderHeader() {
@@ -38,7 +40,7 @@ class ProductPopup extends React.Component {
           <h1>{this.props.name}</h1>
           <p>{this.props.description}</p>
           <section>
-            {this.renderUpvoteButton()}
+            <Upvote {...this.props} />
             <a className="getit-btn" href={this.props.link} target="_blank">GET IT</a>
           </section>
         </section>
@@ -46,14 +48,33 @@ class ProductPopup extends React.Component {
     );
   }
 
+handleComment = (e) => {
+  if(e.keyCode === 13 && e.target.value.length>0){
+    var comment = {
+      content: e.target.value,
+      name: this.props.user.name,
+      avatar: this.props.user.avatar
+    }
+
+    Actions.addComment(this.props.pid, comment);
+    target.value=null;
+  }
+};
+
   renderBodyDiscussion() {
     return (
       <section className="discussion">
         <h2>Discussion</h2>
-        <section className="post-comment">
-          <img className="medium-avatar" src="/img/leo.jpeg"/>
-          <input placeholder="What do you think of this product?" />
-        </section>
+        {
+          this.props.user
+          ?
+          <section className="post-comment">
+            <img className="medium-avatar" src={this.props.user.avatar}/>
+            <input placeholder="What do you think of this product?" onKeyUp={this.handleComment}/>
+          </section>
+          :
+          null
+        }
         {this.renderComments()}
       </section>
     );
