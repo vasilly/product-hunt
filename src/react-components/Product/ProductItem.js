@@ -29,10 +29,7 @@ static getPropsFromStores() {
   };
 
   handleVote = () => {
-    console.log("this.props.pid:")
-    console.log(this.props.pid)
-
-    Actions.addVote(this.props.pid, this.props.user)
+    Actions.addVote(this.props.pid, this.props.user.id)
   };
 
   renderUpvoteButton(){
@@ -74,13 +71,12 @@ renderInfoSession(){
 }
 
   render() {
-    console.log("render ProductItem.js")
     return (
       <li className="product-item">
         {this.renderUpvoteButton()}
         <img className="product-item-media" src={this.props.media} />
         {this.renderNewWindowIcon()}
-        <ProductPopup status={this.state.productPopupStatus} hidePopup={this.hideProductPopup}/>
+        <ProductPopup {...this.props} status={this.state.productPopupStatus} hidePopup={this.hideProductPopup}/>
       </li>
     );
   }

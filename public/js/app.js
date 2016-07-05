@@ -38225,7 +38225,6 @@ var Actions = function () {
         var firebaseRef = new _firebase2.default('https://product-hunt.firebaseio.com');
         firebaseRef.authWithOAuthPopup('facebook', function (error, authData) {
           if (error) {
-            console.log("authWithOAuthPopup error");
             return;
           }
 
@@ -38256,14 +38255,19 @@ var Actions = function () {
       return function (dispatch) {
         var firebaseRef = new _firebase2.default('https://product-hunt.firebaseio.com/products');
         firebaseRef.on('value', function (snapshop) {
+
           var productsValue = snapshop.val();
-          console.log('productsValue');
-          console.log(productsValue.map(function (a) {
-            return a;
-          }));
+
+          console.log("productsValue :");console.log(productsValue);
+          console.log("productsValue[0] :");console.log(productsValue[0]);
+          console.log("productsValue[0] :");console.log(productsValue["0"]);
+          console.log("productsValue['1'] :");console.log(productsValue["1"]);
+          console.log("productsValue[1] :");console.log(productsValue[1]);
+          window.a2 = productsValue;
+
           var products = (0, _lodash2.default)(productsValue).keys().map(function (productKey) {
+            console.log("productKey");console.log(productKey);
             var item = _lodash2.default.clone(productsValue[productKey]);
-            console.log('item');console.log(item);
             item.key = productKey;
             return item;
           }).value();
@@ -38282,33 +38286,24 @@ var Actions = function () {
   }, {
     key: 'addVote',
     value: function addVote(productId, userId) {
-      console.log('addVote');
       return function (dispatch) {
         var firebaseRef = new _firebase2.default('https://product-hunt.firebaseio.com');
-        console.log('productId');
-        console.log(productId);
 
-        firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
+        var voteRef = firebaseRef.child('votes').child(productId).child(userId);
+        voteRef.on('value', function (snapshop) {
+          if (snapshop.val() == null) {
+            voteRef.set(true);
+            firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
 
-        var vote = 0;
-        firebaseRef.on('value', function (snapshop) {
-          // console.log('snapshop');console.log(snapshop.val())
-          console.log('firebaseRef:');console.log(snapshop.val());
-
-          // var products = _.compact(_.values( snapshop.val() ) );
-          vote = snapshop.val();
+            var vote = 0;
+            firebaseRef.on('value', function (snapshop) {
+              vote = snapshop.val();
+            });
+            firebaseRef.set(+vote + 1);
+          }
         });
-        firebaseRef.set(vote + 1);
       };
     }
-
-    // var productsValue =  snapshot.val().filter( (a) => a );
-    // var products = _(productsValue).keys().map((productKey) =>{
-    //   var item =_.clone(productsValue[productKey]);
-    //   return item;
-    // }).value();
-    // dispatch(products);
-
   }]);
 
   return Actions;
@@ -38982,6 +38977,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class;
@@ -39031,10 +39028,7 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
     };
 
     _this.handleVote = function () {
-      console.log("this.props.pid:");
-      console.log(_this.props.pid);
-
-      _actions2.default.addVote(_this.props.pid, _this.props.user);
+      _actions2.default.addVote(_this.props.pid, _this.props.user.id);
     };
 
     _this.state = {
@@ -39099,14 +39093,13 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
   }, {
     key: 'render',
     value: function render() {
-      console.log("render ProductItem.js");
       return _react2.default.createElement(
         'li',
         { className: 'product-item' },
         this.renderUpvoteButton(),
         _react2.default.createElement('img', { className: 'product-item-media', src: this.props.media }),
         this.renderNewWindowIcon(),
-        _react2.default.createElement(_ProductPopup2.default, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup })
+        _react2.default.createElement(_ProductPopup2.default, _extends({}, this.props, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup }))
       );
     }
   }], [{
@@ -39216,18 +39209,6 @@ var ProductPopup = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
 
     _this.state = {
-      product: {
-        id: 2,
-        name: 'Code4Startup',
-        link: 'https://code4startup.com',
-        media: 'img/code4startup.jpeg',
-        upvote: 278,
-        description: 'Code for starups',
-        maker: {
-          name: 'leo',
-          avatar: 'img/leo.jpeg'
-        }
-      },
       comments: [{
         name: 'Leo',
         avatar: 'img/leo.jpeg',
@@ -39252,7 +39233,7 @@ var ProductPopup = function (_React$Component) {
           null,
           _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
         ),
-        this.state.product.upvote
+        this.props.upvote
       );
     }
   }, {
@@ -39260,19 +39241,19 @@ var ProductPopup = function (_React$Component) {
     value: function renderHeader() {
       return _react2.default.createElement(
         'header',
-        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
+        { style: { backgroundImage: 'url(' + this.props.media + ')' } },
         _react2.default.createElement(
           'section',
           { className: 'header-shadow' },
           _react2.default.createElement(
             'h1',
             null,
-            this.state.product.name
+            this.props.name
           ),
           _react2.default.createElement(
             'p',
             null,
-            this.state.product.description
+            this.props.description
           ),
           _react2.default.createElement(
             'section',
@@ -39280,7 +39261,7 @@ var ProductPopup = function (_React$Component) {
             this.renderUpvoteButton(),
             _react2.default.createElement(
               'a',
-              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
+              { className: 'getit-btn', href: this.props.link, target: '_blank' },
               'GET IT'
             )
           )

@@ -28,7 +28,6 @@ class Actions {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
       firebaseRef.authWithOAuthPopup('facebook', (error, authData) => {
         if (error) {
-          console.log("authWithOAuthPopup error")
           return;
         }
 
@@ -55,12 +54,19 @@ class Actions {
     return(dispatch) => {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/products');
       firebaseRef.on('value', (snapshop) => {
+
         var productsValue = snapshop.val();
-        console.log('productsValue');
-        console.log(productsValue.map( (a) => a) );
+
+          console.log("productsValue :");console.log(productsValue);
+          console.log("productsValue[0] :");console.log(productsValue[0]);
+          console.log("productsValue[0] :");console.log(productsValue["0"]);
+          console.log("productsValue['1'] :");console.log(productsValue["1"]);
+          console.log("productsValue[1] :");console.log(productsValue[1]);
+        window.a2 =  productsValue
+
         var products = _(productsValue).keys().map((productKey) => {
+console.log("productKey"); console.log(productKey)
           var item = _.clone(productsValue[productKey]);
-          console.log('item');console.log( item);
           item.key = productKey;
           return item;
         })
@@ -70,47 +76,32 @@ class Actions {
     }
   }
 
-    addProduct(product) {
-      return (dispatch) => {
+  addProduct(product) {
+    return (dispatch) => {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/products');
-      firebaseRef.push(product)
-      }
+      firebaseRef.push(product);
     }
+  }
 
-    addVote(productId, userId) {
-      console.log('addVote')
-      return (dispatch) => {
+  addVote(productId, userId) {
+    return (dispatch) => {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
-      console.log('productId')
-      console.log(productId)
 
-      firebaseRef=firebaseRef.child('products').child(productId).child('upvote')
+      var voteRef = firebaseRef.child('votes').child(productId).child(userId);
+      voteRef.on('value', (snapshop)=> {
+        if( snapshop.val() == null){
+          voteRef.set(true);
+          firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
 
-      var vote=0;
-      firebaseRef.on('value', (snapshop) => {
-      // console.log('snapshop');console.log(snapshop.val())
-      console.log('firebaseRef:');console.log(snapshop.val() )
-
-        // var products = _.compact(_.values( snapshop.val() ) );
-        vote=snapshop.val();
+          var vote = 0;
+          firebaseRef.on('value', (snapshop)=> {
+            vote = snapshop.val();
+          });
+          firebaseRef.set(+vote+1);
+        }
       });
-      firebaseRef.set(vote+1);
-
-      }
     }
-
-
-        // var productsValue =  snapshot.val().filter( (a) => a );
-        // var products = _(productsValue).keys().map((productKey) =>{
-        //   var item =_.clone(productsValue[productKey]);
-        //   return item;
-        // }).value();
-        // dispatch(products);
-
-
-
-
-
+  }
 }
 
 export default alt.createActions(Actions);
