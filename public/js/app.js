@@ -39209,14 +39209,26 @@ var ProductPopup = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
 
     _this.state = {
+      product: {
+        id: 2,
+        name: 'Code4Startup',
+        link: 'https://code4startup.com',
+        media: '/img/code4startup.jpeg',
+        upvote: 278,
+        description: 'Code for starups',
+        maker: {
+          name: 'leo',
+          avatar: '/img/leo.jpeg'
+        }
+      },
       comments: [{
-        name: 'Leo',
-        avatar: 'img/leo.jpeg',
-        content: 'I love this product'
+        name: "Leo",
+        avatar: "/img/leo.jpeg",
+        content: "I love this product"
       }, {
-        name: 'Johny',
-        avatar: 'img/hieu.jpeg',
-        content: 'Me too'
+        name: "Jonny",
+        avatar: "/img/hieu.jpeg",
+        content: "Me too"
       }]
     };
     return _this;
@@ -39233,7 +39245,7 @@ var ProductPopup = function (_React$Component) {
           null,
           _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
         ),
-        this.props.upvote
+        this.state.product.upvote
       );
     }
   }, {
@@ -39241,19 +39253,19 @@ var ProductPopup = function (_React$Component) {
     value: function renderHeader() {
       return _react2.default.createElement(
         'header',
-        { style: { backgroundImage: 'url(' + this.props.media + ')' } },
+        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
         _react2.default.createElement(
           'section',
           { className: 'header-shadow' },
           _react2.default.createElement(
             'h1',
             null,
-            this.props.name
+            this.state.product.name
           ),
           _react2.default.createElement(
             'p',
             null,
-            this.props.description
+            this.state.product.description
           ),
           _react2.default.createElement(
             'section',
@@ -39261,7 +39273,7 @@ var ProductPopup = function (_React$Component) {
             this.renderUpvoteButton(),
             _react2.default.createElement(
               'a',
-              { className: 'getit-btn', href: this.props.link, target: '_blank' },
+              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
               'GET IT'
             )
           )
@@ -39282,7 +39294,7 @@ var ProductPopup = function (_React$Component) {
         _react2.default.createElement(
           'section',
           { className: 'post-comment' },
-          _react2.default.createElement('img', { className: 'medium-avatar', src: 'img/leo.jpeg' }),
+          _react2.default.createElement('img', { className: 'medium-avatar', src: '/img/leo.jpeg' }),
           _react2.default.createElement('input', { placeholder: 'What do you think of this product?' })
         ),
         this.renderComments()
