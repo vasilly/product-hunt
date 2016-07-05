@@ -7,7 +7,8 @@ class ProductStore {
   constructor() {
     this.state = {
       user: null,
-      products: []
+      products: [],
+      comments: []
     };
   }
 
@@ -19,6 +20,10 @@ class ProductStore {
   @bind(Actions.getProducts)
   getProducts(products) {
     this.setState({products: products});
+  }
+  @bind(Actions.getComment)
+  getComments(comments) {
+    this.setState({comments: comments})
   }
 }
 

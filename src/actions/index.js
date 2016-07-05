@@ -108,6 +108,23 @@ console.log("productKey"); console.log(productKey)
       firebaseRef.child(productId).push(comment);
     }
   }
+
+  getComments(productId) {
+    return (dispatch) => {
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/comments');
+      firebaseRef.child(productId).on('value', (snapshop) => {
+        var commentsVal = snapshop.val();
+        var comments = _(commentsVal).keys().map( (commentKey) => {
+          var item = _.clone( commentsVal[commentKey]);
+          item.key = commentKey;
+          return item;
+        } )
+        .value();
+        dispath(comments);
+      } );
+
+    }
+  }
 }
 
 export default alt.createActions(Actions);

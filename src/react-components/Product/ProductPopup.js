@@ -9,20 +9,6 @@ import Actions from '../../actions';
 class ProductPopup extends React.Component {
   constructor() {
     super();
-    this.state = {
-      comments: [
-        {
-          name: "Leo",
-          avatar: "/img/leo.jpeg",
-          content: "I love this product"
-        },
-        {
-          name: "Jonny",
-          avatar: "/img/hieu.jpeg",
-          content: "Me too"
-        }
-      ]
-    }
   }
 
   static getStores() {
@@ -31,6 +17,13 @@ class ProductPopup extends React.Component {
 
   static getPropsFromStores() {
     return ProductStore.getState();
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if (nextProps.status && this.props.status != nextState.status){
+      Actions.getComments(this.props.pid);
+    }
+    return true
   }
 
   renderHeader() {
