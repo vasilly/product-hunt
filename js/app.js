@@ -38306,7 +38306,7 @@ var Actions = function () {
     }
   }, {
     key: 'addComment',
-    value: function addComment(productId, commnet) {
+    value: function addComment(productId, comment) {
       return function (dispatch) {
         var firebaseRef = new _firebase2.default('https://product-hunt.firebaseio.com/comments');
         firebaseRef.child(productId).push(comment);
@@ -38324,7 +38324,7 @@ var Actions = function () {
             item.key = commentKey;
             return item;
           }).value();
-          dispath(comments);
+          dispatch(comments);
         });
       };
     }
@@ -39580,7 +39580,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0, _decorators.bind)(_actions2.default.login, _actions2.default.initSession, _actions2.default.logout), _dec3 = (0, _decorators.bind)(_actions2.default.getProducts), _dec4 = (0, _decorators.bind)(_actions2.default.getComment), _dec(_class = (_class2 = function () {
+var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0, _decorators.bind)(_actions2.default.login, _actions2.default.initSession, _actions2.default.logout), _dec3 = (0, _decorators.bind)(_actions2.default.getProducts), _dec4 = (0, _decorators.bind)(_actions2.default.getComments), _dec(_class = (_class2 = function () {
   function ProductStore() {
     _classCallCheck(this, ProductStore);
 
