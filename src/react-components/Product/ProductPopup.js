@@ -19,11 +19,11 @@ class ProductPopup extends React.Component {
     return ProductStore.getState();
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextProps.status && this.props.status != nextState.status){
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.status && this.props.status != nextProps.status) {
       Actions.getComments(this.props.pid);
     }
-    return true
+    return true;
   }
 
   renderHeader() {
@@ -41,18 +41,18 @@ class ProductPopup extends React.Component {
     );
   }
 
-handleComment = (e) => {
-  if(e.keyCode === 13 && e.target.value.length>0){
-    var comment = {
-      content: e.target.value,
-      name: this.props.user.name,
-      avatar: this.props.user.avatar
-    }
+  handleComment = (e) => {
+    if(e.keyCode === 13 && e.target.value.length > 0) {
+      var comment = {
+        content: e.target.value,
+        name: this.props.user.name,
+        avatar: this.props.user.avatar
+      }
 
-    Actions.addComment(this.props.pid, comment);
-    target.value=null;
-  }
-};
+      Actions.addComment(this.props.pid, comment);
+      e.target.value = null;
+    }
+  };
 
   renderBodyDiscussion() {
     return (
@@ -63,7 +63,7 @@ handleComment = (e) => {
           ?
           <section className="post-comment">
             <img className="medium-avatar" src={this.props.user.avatar}/>
-            <input placeholder="What do you think of this product?" onKeyUp={this.handleComment}/>
+            <input placeholder="What do you think of this product?" onKeyUp={this.handleComment} />
           </section>
           :
           null
@@ -87,7 +87,7 @@ handleComment = (e) => {
     return (
       <ul className="comment-list">
         {
-          this.state.comments.map(function(comment, idx) {
+          this.props.comments.map(function(comment, idx) {
             return (
               <li key={idx}>
                 <img className="medium-avatar" src={comment.avatar}/>
