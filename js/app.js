@@ -38977,6 +38977,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class;
@@ -39026,7 +39028,7 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
     };
 
     _this.handleVote = function () {
-      _actions2.default.addVote(_this.props.pid, _this.props.user);
+      _actions2.default.addVote(_this.props.pid, _this.props.user.id);
     };
 
     _this.state = {
@@ -39099,7 +39101,7 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
         _react2.default.createElement('img', { className: 'product-item-media', src: this.props.media }),
         this.renderInfoSession(),
         this.renderNewWindowIcon(),
-        _react2.default.createElement(_ProductPopup2.default, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup })
+        _react2.default.createElement(_ProductPopup2.default, _extends({}, this.props, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup }))
       );
     }
   }], [{
@@ -39209,18 +39211,6 @@ var ProductPopup = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
 
     _this.state = {
-      product: {
-        id: 2,
-        name: 'Code4Startup',
-        link: 'https://code4startup.com',
-        media: '/img/code4startup.jpeg',
-        upvote: 278,
-        description: 'Code for starups',
-        maker: {
-          name: 'leo',
-          avatar: '/img/leo.jpeg'
-        }
-      },
       comments: [{
         name: "Leo",
         avatar: "/img/leo.jpeg",
@@ -39245,7 +39235,7 @@ var ProductPopup = function (_React$Component) {
           null,
           _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
         ),
-        this.state.product.upvote
+        this.props.upvote
       );
     }
   }, {
@@ -39253,19 +39243,19 @@ var ProductPopup = function (_React$Component) {
     value: function renderHeader() {
       return _react2.default.createElement(
         'header',
-        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
+        { style: { backgroundImage: 'url(' + this.props.media + ')' } },
         _react2.default.createElement(
           'section',
           { className: 'header-shadow' },
           _react2.default.createElement(
             'h1',
             null,
-            this.state.product.name
+            this.props.name
           ),
           _react2.default.createElement(
             'p',
             null,
-            this.state.product.description
+            this.props.description
           ),
           _react2.default.createElement(
             'section',
@@ -39273,7 +39263,7 @@ var ProductPopup = function (_React$Component) {
             this.renderUpvoteButton(),
             _react2.default.createElement(
               'a',
-              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
+              { className: 'getit-btn', href: this.props.link, target: '_blank' },
               'GET IT'
             )
           )
