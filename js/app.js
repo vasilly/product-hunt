@@ -39223,7 +39223,7 @@ var ProductPopup = (0, _connectToStores2.default)(_class = function (_React$Comp
         };
 
         _actions2.default.addComment(_this.props.pid, comment);
-        target.value = null;
+        e.target.value = null;
       }
     };
 
@@ -39233,7 +39233,7 @@ var ProductPopup = (0, _connectToStores2.default)(_class = function (_React$Comp
   _createClass(ProductPopup, [{
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps.status && this.props.status != nextState.status) {
+      if (nextProps.status && this.props.status != nextProps.status) {
         _actions2.default.getComments(this.props.pid);
       }
       return true;
@@ -39309,7 +39309,7 @@ var ProductPopup = (0, _connectToStores2.default)(_class = function (_React$Comp
       return _react2.default.createElement(
         'ul',
         { className: 'comment-list' },
-        this.state.comments.map(function (comment, idx) {
+        this.props.comments.map(function (comment, idx) {
           return _react2.default.createElement(
             'li',
             { key: idx },
