@@ -6,33 +6,34 @@ import ProductStore from '../../stores/ProductStore';
 
 @connectToStores
 class ProductItem extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       productPopupStatus: false
     }
   }
 
-static getStores() {
-  return [ProductStore];
-}
-static getPropsFromStores() {
-  return ProductStore.getState();
-}
+  static getStores() {
+    return [ProductStore];
+  }
+
+  static getPropsFromStores() {
+    return ProductStore.getState();
+  }
 
   showProductPopup = () => {
-    this.setState({productPopupStatus: true})
+    this.setState({productPopupStatus: true});
   };
 
   hideProductPopup = () => {
-    this.setState({productPopupStatus: false})
+    this.setState({productPopupStatus: false});
   };
 
   handleVote = () => {
-    Actions.addVote(this.props.pid, this.props.user.id)
+    Actions.addVote(this.props.pid, this.props.user);
   };
 
-  renderUpvoteButton(){
+  renderUpvoteButton() {
     return (
       <a className="upvote-button" href="#" onClick={this.handleVote}>
         <span>
@@ -40,11 +41,10 @@ static getPropsFromStores() {
         </span>
         {this.props.upvote}
       </a>
-    )
+    );
   }
 
-
-  renderNewWindowIcon(){
+  renderNewWindowIcon() {
     return (
       <a className="product-item-link" href={this.props.link}>
         <span>
@@ -54,29 +54,28 @@ static getPropsFromStores() {
     );
   }
 
-renderInfoSession(){
-    console.log("renderInfoSession");
-    console.log("this.props.description:");
-    console.log(this.props.description);
-  return (
-    <section className="product-item-info">
-      <a href="#" onClick = {this.showProductPopup}>
-        <h2>{this.props.name}</h2>
-      </a>
-      <p>{this.props.description}</p>
-      <a href="#">
-      </a>
-    </section>
-  )
-}
+  renderInfoSession() {
+    return (
+      <section className="product-item-info">
+        <a href="#" onClick={this.showProductPopup}>
+          <h2>{this.props.name}</h2>
+        </a>
+        <p>{this.props.description}</p>
+        <a href="#">
+          <img className="small-avatar" src={this.props.maker.avatar}/>
+        </a>
+      </section>
+    );
+  }
 
   render() {
     return (
       <li className="product-item">
         {this.renderUpvoteButton()}
         <img className="product-item-media" src={this.props.media} />
+        {this.renderInfoSession()}
         {this.renderNewWindowIcon()}
-        <ProductPopup {...this.props} status={this.state.productPopupStatus} hidePopup={this.hideProductPopup}/>
+        <ProductPopup status={this.state.productPopupStatus} hidePopup={this.hideProductPopup}/>
       </li>
     );
   }
