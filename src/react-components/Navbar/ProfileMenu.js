@@ -46,6 +46,7 @@ class ProfileMenu extends React.Component {
   }
 
   render() {
+    console.log("render");
     return (
       <section className="profile-menu">
         <img src={this.props.user.avatar} onClick={this.handleClick} className="profile-btn medium-avatar" ref="profileBtn"/>

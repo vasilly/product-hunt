@@ -1,0 +1,22 @@
+Vendors have been making code changes since this morning.
+Vendors are making code changes since this morning.
+
+Vendors have been working on the code since this morning.
+Vendors have been coding since this morning.
+
+king have/has been jumping
+The king has been jumping
+The king has been making noise all night.
+
+The top priority is to bring the branching strategy out to the client, so that we can put this into practise
+, ASAP.
+
+So the whole idea about the meeting I had with the client was to train them about the multi-tenancy stuff. So at the moment the client has got many vendors. All the vendors are building the website at the same time. Now the challenge is every code *project* built by the vendors has to *be* merged into one branch, the primary branch. very difficult to get the code only relevent to go into prod*.* this is one of the challenge and I came up with a branching stategy and then I propose the strategy to the client.  The strategy was more about haveing the vendor specific branches where they built their own code commit to vendor specific branch
+
+So the whole idea about the meeting I had with the client was to train them about the multi-tenancy stuff. So at the moment the client has got many vendors. All the vendors are building the website at the same time. Now the challenge is that all vendor code has to merged into one branch, the primary branch. This is very difficult to get only relevent code to go into prod*.* this is one of the challenges and I came up with a branching stategy which  I then proposed to the client.  The strategy was more about haveing the vendor specific branches where they built their own code and then commit to vendor specific branches
+
+
+
+
+
+At the moment the client has many vendors

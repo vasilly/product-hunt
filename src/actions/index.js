@@ -1,5 +1,6 @@
 import alt from '../alt';
 import Firebase from 'firebase';
+import _ from 'lodash';
 
 class Actions {
 
@@ -27,6 +28,7 @@ class Actions {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
       firebaseRef.authWithOAuthPopup('facebook', (error, authData) => {
         if (error) {
+          console.log("authWithOAuthPopup error")
           return;
         }
 
@@ -53,7 +55,16 @@ class Actions {
     return(dispatch) => {
       var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/products');
       firebaseRef.on('value', (snapshop) => {
-        var products = snapshop.val();
+        var productsValue = snapshop.val();
+        console.log('productsValue');
+        console.log(productsValue.map( (a) => a) );
+        var products = _(productsValue).keys().map((productKey) => {
+          var item = _.clone(productsValue[productKey]);
+          console.log('item');console.log( item);
+          item.key = productKey;
+          return item;
+        })
+        .value();
         dispatch(products);
       });
     }
@@ -61,10 +72,45 @@ class Actions {
 
     addProduct(product) {
       return (dispatch) => {
-      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
-      firebaseRef.push()
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com/products');
+      firebaseRef.push(product)
       }
     }
+
+    addVote(productId, userId) {
+      console.log('addVote')
+      return (dispatch) => {
+      var firebaseRef = new Firebase('https://product-hunt.firebaseio.com');
+      console.log('productId')
+      console.log(productId)
+
+      firebaseRef=firebaseRef.child('products').child(productId).child('upvote')
+
+      var vote=0;
+      firebaseRef.on('value', (snapshop) => {
+      // console.log('snapshop');console.log(snapshop.val())
+      console.log('firebaseRef:');console.log(snapshop.val() )
+
+        // var products = _.compact(_.values( snapshop.val() ) );
+        vote=snapshop.val();
+      });
+      firebaseRef.set(vote+1);
+
+      }
+    }
+
+
+        // var productsValue =  snapshot.val().filter( (a) => a );
+        // var products = _(productsValue).keys().map((productKey) =>{
+        //   var item =_.clone(productsValue[productKey]);
+        //   return item;
+        // }).value();
+        // dispatch(products);
+
+
+
+
+
 }
 
 export default alt.createActions(Actions);

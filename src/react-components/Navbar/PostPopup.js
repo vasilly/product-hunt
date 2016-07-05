@@ -4,6 +4,7 @@ import Actions from '../../actions';
 
 class PostPopup extends React.Component {
   handlePost = () => {
+    console.log("handle Post")
     var newProduct = {
       name: this.refs.name.value,
       link: this.refs.link.value,
